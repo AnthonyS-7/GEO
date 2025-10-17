@@ -15,6 +15,25 @@
     </a>
 </div>
 
+## Changes
+
+Changes to fix bugs in the original repository:
+
+- `requirements.txt` is updated to include nltk
+- `initialize.py` exists to create a necessary folder and download an nltk resource
+- README updated accordingly (and also mentions needing to set your OPENAI_API_KEY)
+
+This gets the earlier errors out of the way, but the list index out of range error remains: 
+
+```
+Traceback (most recent call last):
+  File "C:\Users\[user]\Documents\GitHub\GEO\src\run_geo.py", line 108, in <module>
+    print(improve(k['query'], idx = int(k['sugg_idx']), impression_fn=impression_wordpos_count_simple))
+  File "C:\Users\[user]\Documents\GitHub\GEO\src\run_geo.py", line 84, in improve
+    summaries_copy = summaries[:idx] + [GEO_METHODS[meth_name](summaries[idx])] + summaries[idx+1:]
+IndexError: list index out of range
+```
+
 ## TLDR
 
 **GEO** introduces optimization techniques to boost website visibility in generative engine responses.
@@ -31,7 +50,7 @@
 1. Create a conda environment: conda create -n geo python=3.9
 2. conda activate geo
 3. pip install -r requirements.txt
-
+4. Set `OPENAI_API_KEY` environment variable
 
 
 ## Run GEO
@@ -39,6 +58,7 @@
 To replicate results in paper, simply run:
 ```python
 cd src
+python initialize.py
 python run_geo.py
 ```
 
